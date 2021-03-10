@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import RecipeCard from "./RecipeCard";
 
 const API_ID = "669ffd56";
 const API_KEY = "99bbd34468d8bd690f225c2ec33741af";
@@ -8,6 +8,7 @@ const API_KEY = "99bbd34468d8bd690f225c2ec33741af";
 class MealPlan extends Component {
   state = {
     recipes: [],
+    diet: "balanced",
   };
 
   //Fetch API with balanced diet recipes
@@ -30,25 +31,11 @@ class MealPlan extends Component {
     const recipeList = recipes.length ? (
       recipes.map((recipe) => {
         return (
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={recipe.recipe.image} />
-            <Card.Body>
-              <Card.Title>
-                {recipe.recipe.label} - {recipe.recipe.mealType}
-              </Card.Title>
-              <Card.Text>
-                {recipe.recipe.ingredientLines.map((ing) => (
-                  <ul>
-                    <li> {ing} </li>
-                  </ul>
-                ))}
-                vs
-              </Card.Text>
-              <a href={recipe.recipe.url} target="_blank noreferrer">
-                <Button variant="primary">Get the Recipe</Button>
-              </a>
-            </Card.Body>
-          </Card>
+          <RecipeCard
+            image={recipe.recipe.image}
+            name={recipe.recipe.label}
+            link={recipe.recipe.url}
+          />
         );
       })
     ) : (
@@ -59,7 +46,7 @@ class MealPlan extends Component {
     );
     return (
       <div>
-        <strong>Meals</strong>
+        <h1>Meal Planner Happiness</h1>
         {recipeList}
       </div>
     );
