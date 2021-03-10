@@ -6,7 +6,7 @@ const RecipeCard = ({ image, name, link }) => {
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text>Put list of ingredients here</Card.Text>
+        <Card.Text>Put list of ingredients here!</Card.Text>
         <a href={link} target="_blank noreferrer">
           <Button variant="primary">Get the Recipe</Button>
         </a>
