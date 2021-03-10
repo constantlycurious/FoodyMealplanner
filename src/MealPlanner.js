@@ -6,16 +6,19 @@ const API_ID = "669ffd56";
 const API_KEY = "99bbd34468d8bd690f225c2ec33741af";
 
 class MealPlan extends Component {
-  state = {
-    recipes: [],
-    diet: "balanced",
-  };
+  constructor() {
+    super();
+    this.state = {
+      recipes: [],
+      diet: "balanced",
+    };
+  }
 
   //Fetch API with balanced diet recipes
   componentDidMount() {
     axios
       .get(
-        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=balanced`
+        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}`
       )
       .then((res) => {
         console.log(res);
@@ -35,6 +38,7 @@ class MealPlan extends Component {
             image={recipe.recipe.image}
             name={recipe.recipe.label}
             link={recipe.recipe.url}
+            ingredients={recipe.recipe.ingredientLines}
           />
         );
       })
