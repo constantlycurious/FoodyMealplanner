@@ -1,40 +1,95 @@
 import React, { Component } from "react";
 import axios from "axios";
-import RecipeCard from "./RecipeCard";
+import { BreakfastCard, LunchCard, DinnerCard } from "./RecipeCard";
+import "./MealPlanner.css";
 
 const API_ID = "669ffd56";
 const API_KEY = "99bbd34468d8bd690f225c2ec33741af";
 
+// We have to display 7 breakfasts, 7 lunches and 7 dinners;
+// We will get the recipes on the edamame API and use it on the state as an array;
+// Problem: We need diversity and not display the array always on the same order; The API doesnt have recipes ID's.
+// Possible solution: Get more than 7 meal from the API (ex: 40), Shuffle the array and then create a new array with only 7;
+// ex:          [banana, apple, orange, durian, kiwi, cherry, lemon, melon, pumpkin] -> then Reset ->
+//               [ apple, kiwi, pumpkin, banana, orange, melon, lemon, cherry, durian] -> Splice to 7 meals ->
+//               [ apple, kiwi, pumpkin, banana, orange, melon, lemon]
+//In Conclusion: 1º get 40 recipes
+//               2º Shuffle the 40 recipes
+//               3º Get the first 7 recipes from that shuffled array
+// Since we have to display always 7 breakfasts, 7 lunches and 7 dinners I called the API 3 times with the meal types and put the recipes on the State as arrays.
+
+// Function to shuffle arrays
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
 class MealPlan extends Component {
+  //default meal plan
   constructor() {
     super();
     this.state = {
-      recipes: [],
+      breakfast: [],
+      lunch: [],
+      dinner: [],
       diet: "balanced",
+      mealType: "breakfast",
+      numberMeals: "40",
     };
   }
 
-  //Fetch API with balanced diet recipes
+  //Fetch API for the 3 types of meals
   componentDidMount() {
     axios
       .get(
-        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}`
+        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=breakfast&from=0&to=${this.state.numberMeals}`
       )
       .then((res) => {
         console.log(res);
         this.setState({
-          recipes: res.data.hits,
+          breakfast: res.data.hits,
+        });
+      });
+
+    axios
+      .get(
+        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=lunch&from=0&to=${this.state.numberMeals}&dishType=main`
+      )
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          lunch: res.data.hits,
+        });
+      });
+
+    axios
+      .get(
+        `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=dinner&from=0&to=${this.state.numberMeals}&dishType=main`
+      )
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          dinner: res.data.hits,
         });
       });
   }
 
-  //displaying recipes per week
+  //displaying recipes per type of meal
   render() {
-    const { recipes } = this.state;
-    const recipeList = recipes.length ? (
-      recipes.map((recipe) => {
+    const { breakfast, lunch, dinner } = this.state;
+
+    const shuffleBreakfastList = shuffleArray(breakfast); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
+    const weeklyBreakfastNumber = shuffleBreakfastList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
+    const BreakfastCardList = breakfast.length ? ( // create a recipe card for each recipe
+      weeklyBreakfastNumber.map((recipe) => {
         return (
-          <RecipeCard
+          <BreakfastCard
             image={recipe.recipe.image}
             name={recipe.recipe.label}
             link={recipe.recipe.url}
@@ -48,10 +103,74 @@ class MealPlan extends Component {
         <p>Meals are cooking...</p>{" "}
       </div>
     );
+
+    const shuffleLunchList = shuffleArray(lunch); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
+    const weeklyLunchNumber = shuffleLunchList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
+    const LunchCardList = lunch.length ? ( // create a recipe card for each recipe
+      weeklyLunchNumber.map((recipe) => {
+        return (
+          <BreakfastCard
+            image={recipe.recipe.image}
+            name={recipe.recipe.label}
+            link={recipe.recipe.url}
+            ingredients={recipe.recipe.ingredientLines}
+          />
+        );
+      })
+    ) : (
+      <div>
+        {" "}
+        <p>Meals are cooking...</p>{" "}
+      </div>
+    );
+
+    const shuffleDinnerList = shuffleArray(dinner); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
+    const weeklyDinnerNumber = shuffleDinnerList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
+    const DinnerCardList = dinner.length ? ( //   // create a recipe card for each recipe
+      weeklyDinnerNumber.map((recipe) => {
+        return (
+          <BreakfastCard
+            image={recipe.recipe.image}
+            name={recipe.recipe.label}
+            link={recipe.recipe.url}
+            ingredients={recipe.recipe.ingredientLines}
+          />
+        );
+      })
+    ) : (
+      <div>
+        {" "}
+        <p>Meals are cooking...</p>{" "}
+      </div>
+    );
+
     return (
       <div>
         <h1>Meal Planner Happiness</h1>
-        {recipeList}
+        <div className="mealtypes">
+          {" "}
+          <h2>Meals</h2>
+          <h2>Breakfast</h2>
+          <h2>Lunch</h2>
+          <h2>Dinner</h2>
+        </div>
+        <div className="plan_container">
+          <div className="days">
+            <h2>Monday</h2>
+            <h2>Monday</h2>
+            <h2>Tuesday</h2>
+            <h2>Wednesday</h2>
+            <h2> Thursday</h2>
+            <h2>Friday</h2>
+            <h2>Saturday</h2>
+            <h2>Sunday</h2>
+          </div>
+          <div className="meals">
+            <div id="breakfast">{BreakfastCardList}</div>
+            <div id="lunch">{LunchCardList}</div>
+            <div id="dinner">{DinnerCardList}</div>
+          </div>
+        </div>
       </div>
     );
   }

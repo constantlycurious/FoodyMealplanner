@@ -1,12 +1,11 @@
 import { Card, Button } from "react-bootstrap";
 
-const RecipeCard = ({ image, name, link, ingredients }) => {
+const BreakfastCard = ({ image, name, link, ingredients }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text> {ingredients}</Card.Text>
         <a href={link} target="_blank noreferrer">
           <Button variant="primary">Get the Recipe</Button>
         </a>
@@ -14,4 +13,33 @@ const RecipeCard = ({ image, name, link, ingredients }) => {
     </Card>
   );
 };
-export default RecipeCard;
+
+const LunchCard = ({ image, name, link, ingredients }) => {
+  return (
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={image} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <a href={link} target="_blank noreferrer">
+          <Button variant="primary">Get the Recipe</Button>
+        </a>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const DinnerCard = ({ image, name, link, ingredients }) => {
+  return (
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={image} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <a href={link} target="_blank noreferrer">
+          <Button variant="primary">Get the Recipe</Button>
+        </a>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export { BreakfastCard, LunchCard, DinnerCard };

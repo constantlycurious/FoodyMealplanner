@@ -1,0 +1,32 @@
+.plan_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.days {
+  height: 100vh;
+}
+
+.days h2 {
+  height: 25rem;
+  display: flex;
+  text-align: center;
+  background-color: bisque;
+}
+
+.mealtypes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mealtypes h2 {
+  display: flex;
+}
+
+.meals {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
