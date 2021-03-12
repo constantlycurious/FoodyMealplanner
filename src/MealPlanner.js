@@ -3,8 +3,8 @@ import axios from "axios";
 import { BreakfastCard, LunchCard, DinnerCard } from "./RecipeCard";
 import "./MealPlanner.css";
 
-const API_ID = "669ffd56";
-const API_KEY = "99bbd34468d8bd690f225c2ec33741af";
+const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
+const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
 
 // We have to display 7 breakfasts, 7 lunches and 7 dinners;
 // We will get the recipes on the edamame API and use it on the state as an array;
