@@ -1,36 +1,19 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 const Filter = (handleChange) => {
   return (
-    <form>
-      <p className="title">Select your diet:</p>
-      <ul>
-        <li>
-          <label>
-            <input type="radio" value="Standard" onChange={handleChange} />
-            Standard
-          </label>
-        </li>
-
-        <li>
-          <label>
-            <input type="radio" value="Vegetarian" onChange={handleChange} />
-            Vegetarian
-          </label>
-        </li>
-
-        <li>
-          <label>
-            <input type="radio" value="Vegan" onChange={handleChange} />
-            Vegan
-          </label>
-        </li>
-      </ul>
-
-      <button type="submit" className="submit-button">
-        Make your choice
-      </button>
-    </form>
+    <Form.Group>
+      <Form.Label>Diet Preferences</Form.Label> <br />
+      <Form.Check name="diet" label="Standard" inline onChange={handleChange} />
+      <Form.Check
+        name="diet"
+        label="Vegetarian"
+        inline
+        onChange={handleChange}
+      />
+      <Form.Check name="diet" label="Vegan" inline onChange={handleChange} />
+    </Form.Group>
   );
 };
 

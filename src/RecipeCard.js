@@ -1,6 +1,6 @@
 import { Card, Button } from "react-bootstrap";
 
-const BreakfastCard = ({ image, name, link, ingredients }) => {
+const BreakfastCard = ({ image, name, link }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={image} />
@@ -14,7 +14,7 @@ const BreakfastCard = ({ image, name, link, ingredients }) => {
   );
 };
 
-const LunchCard = ({ image, name, link, ingredients }) => {
+const LunchCard = ({ image, name, link }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={image} />
@@ -28,7 +28,7 @@ const LunchCard = ({ image, name, link, ingredients }) => {
   );
 };
 
-const DinnerCard = ({ image, name, link, ingredients }) => {
+const DinnerCard = ({ image, name, link }) => {
   return (
     <Card style={{ width: "12rem" }}>
       <Card.Img variant="top" src={image} />

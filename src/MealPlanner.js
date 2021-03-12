@@ -48,6 +48,7 @@ class MealPlan extends Component {
   onhandleRadioButton = (e) => {
     this.setState({ diet: e.target.value });
   };
+
   //Fetch API for the 3 types of meals
   componentDidMount() {
     axios
