@@ -1,45 +1,27 @@
 import { Card, Button } from "react-bootstrap";
+import "./RecipeCard.css";
 
-const BreakfastCard = ({ image, name, link }) => {
+const CardMeal = ({ image, name, link }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={image} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <a href={link} target="_blank noreferrer">
-          <Button variant="primary">Get the Recipe</Button>
-        </a>
-      </Card.Body>
-    </Card>
+    <div id="card">
+      <div className="slide">
+        <div className="content">
+          <img src={image} alt="recipe_image" />
+        </div>
+      </div>
+      <div className="slide slide2">
+        <div className="content">
+          <h3>{name}</h3>
+          <a href={link} target="_blank noreferrer">
+            <button id="btn" type="button">
+              Recipe
+            </button>
+            <div id="circle"></div>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };
 
-const LunchCard = ({ image, name, link }) => {
-  return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={image} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <a href={link} target="_blank noreferrer">
-          <Button variant="primary">Get the Recipe</Button>
-        </a>
-      </Card.Body>
-    </Card>
-  );
-};
-
-const DinnerCard = ({ image, name, link }) => {
-  return (
-    <Card style={{ width: "12rem" }}>
-      <Card.Img variant="top" src={image} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <a href={link} target="_blank noreferrer">
-          <Button variant="primary">Get the Recipe</Button>
-        </a>
-      </Card.Body>
-    </Card>
-  );
-};
-
-export { BreakfastCard, LunchCard, DinnerCard };
+export default CardMeal;
