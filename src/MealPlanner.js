@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { BreakfastCard, LunchCard, DinnerCard } from "./RecipeCard";
-import "./MealPlanner.css";
+import CardMeal from "./RecipeCard";
+import "./MealPlanner2.css";
 import Filter from "./Filter";
 
-const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
-const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
+//const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
+//const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
+const API_ID = "8d4623fe";
+const API_KEY = "dfb5f77b9d4cc062175b5cad111db198";
+const URL = "https://api.edamam.com/search?";
 
 // We have to display 7 breakfasts, 7 lunches and 7 dinners;
 // We will get the recipes on the edamame API and use it on the state as an array;
@@ -45,15 +48,11 @@ class MealPlan extends Component {
     };
   }
 
-  onhandleRadioButton = (e) => {
-    this.setState({ diet: e.target.value });
-  };
-
-  //Fetch API for the 3 types of meals
+  //Fetch API for the 3 types of meals (Breakfast, Lunch, Dinner)
   componentDidMount() {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=breakfast&from=0&to=${this.state.numberMeals}`
+        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=breakfast&from=0&to=${this.state.numberMeals}`
       )
       .then((res) => {
         console.log(res);
@@ -64,7 +63,7 @@ class MealPlan extends Component {
 
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=lunch&from=0&to=${this.state.numberMeals}&dishType=main`
+        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=lunch&from=0&to=${this.state.numberMeals}&dishType=main`
       )
       .then((res) => {
         console.log(res);
@@ -75,7 +74,7 @@ class MealPlan extends Component {
 
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=dinner&from=0&to=${this.state.numberMeals}&dishType=main`
+        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=dinner&from=0&to=${this.state.numberMeals}&dishType=main`
       )
       .then((res) => {
         console.log(res);
@@ -85,16 +84,21 @@ class MealPlan extends Component {
       });
   }
 
+  //Adding user preferences
+  onHandleRadioButton = (e) => {
+    this.setState({ diet: e.target.value });
+  };
+
   //displaying recipes per type of meal
   render() {
-    const { breakfast, lunch, dinner } = this.state;
+    const { breakfast, lunch, dinner, days } = this.state;
 
     const shuffleBreakfastList = shuffleArray(breakfast); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
     const weeklyBreakfastNumber = shuffleBreakfastList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
     const BreakfastCardList = breakfast.length ? ( // create a recipe card for each recipe
       weeklyBreakfastNumber.map((recipe) => {
         return (
-          <BreakfastCard
+          <CardMeal
             image={recipe.recipe.image}
             name={recipe.recipe.label}
             link={recipe.recipe.url}
@@ -114,7 +118,7 @@ class MealPlan extends Component {
     const LunchCardList = lunch.length ? ( // create a recipe card for each recipe
       weeklyLunchNumber.map((recipe) => {
         return (
-          <BreakfastCard
+          <CardMeal
             image={recipe.recipe.image}
             name={recipe.recipe.label}
             link={recipe.recipe.url}
@@ -134,7 +138,7 @@ class MealPlan extends Component {
     const DinnerCardList = dinner.length ? ( //   // create a recipe card for each recipe
       weeklyDinnerNumber.map((recipe) => {
         return (
-          <BreakfastCard
+          <CardMeal
             image={recipe.recipe.image}
             name={recipe.recipe.label}
             link={recipe.recipe.url}
@@ -152,28 +156,20 @@ class MealPlan extends Component {
     return (
       <div>
         <h1>Meal Planner Happiness</h1>
-        <Filter handleChange={this.onhandleRadioButton} />
-        <div className="container">
+        <Filter handleChange={this.onHandleRadioButton} />
+        <div id="container">
           <div className="mealtypes">
             {" "}
-            <h2>Meals</h2>
-            <h2>Breakfast</h2>
-            <h2>Lunch</h2>
-            <h2>Dinner</h2>
+            <h2> </h2>
           </div>
           <div className="plan_container">
-            <div className="days">
-              <h2>Monday</h2>
-              <h2>Tuesday</h2>
-              <h2>Wednesday</h2>
-              <h2> Thursday</h2>
-              <h2>Friday</h2>
-              <h2>Saturday</h2>
-              <h2>Sunday</h2>
-            </div>
+            <div className="days"></div>
             <div className="meals">
+              <h2>Breakfast</h2>
               <div id="breakfast">{BreakfastCardList}</div>
+              <h2>Lunch</h2>
               <div id="lunch">{LunchCardList}</div>
+              <h2>Dinner</h2>
               <div id="dinner">{DinnerCardList}</div>
             </div>
           </div>
