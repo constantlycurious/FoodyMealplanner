@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/homeCss.css">
+        <script src="js/homejs.js></script>
+        <title>Homepage</title>
+    </head>
+    <body>
+    <button onclick="topFunction()" id="myBtn">Top</button>
+    <nav>
+        <ul class="superNav" id="mainMenu">
+            <li class="leftLi"><a href="index.html">Home</a></li>
+            <li><a href="">Meal Planner</a></li>
+            <li><a href="">About Us</a></li>
+            <li class="menuIcon"><a href="javascript:void(0)" onclick="openMenu()">&#9776;</a></li>
+        </ul>
+    </nav>
+    <div class="container" id="firstSec">
+        <div class="row">
+            <div class="col-6 leftCol">
+                <div class="absolute">
+                    <h1>Get Inspired</h1>
+                </div>
+            </div>
+            <div class="col-6">
+                <a href="#secSec" class="seeMore">See more</a>
+            </div>            
+        </div>
+    </div>
+    <div class="container" id="secSec" name="secSec">
+
+        <div class="row">
+            <div class="col-5">
+                <div class="col-4"> <!-- container flex -->
+                <div class="item IconD">
+                    <a href=""><img src="https://drive.google.com/file/d/1O1xix3FczHTpT0H3JUjVCoOk5mSWn9AQ/view?usp=drivesdk"></a>
+                </div>
+                <div class="item NameD">
+                    <a href="">Meal Planner</a>
+                </div>
+                </div>                
+            </div>
+            <div class="col-5">
+                <div class="col-4">
+                <div class="item IconD">
+                    <a href=""><img src="https://drive.google.com/file/d/1O0TRiZTS40RBuOJUM7Wi-cXHstokSIjR/view?usp=drivesdk"></a>
+                </div>
+                <div class="item NameD">
+                    <a href="" class="item NameD">About Us</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="thirdSec">
+        <div class="row">
+            <div class="col-6 leftCol">
+                <div class="absolute">
+                    <h1 class="third">Start now</h1>
+                </div>
+            </div>
+            <div class="col-6">
+                <a href="#" class="seeMore third">Meal Planner</a>
+            </div>            
+        </div>
+    </div>
+    <script>
+        var mybutton = document.getElementById("myBtn");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+          } else {
+    mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+        }
+    </script>
+    </body>
+</html>
