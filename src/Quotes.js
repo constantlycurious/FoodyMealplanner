@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Quotes.css";
 
 function Quotes() {
   const [quote, setQuote] = useState("");
@@ -14,7 +15,7 @@ function Quotes() {
     };
   }, []);
   function getQuote() {
-    fetch("http://quotes.rest/qod.json?category=inspire")
+    fetch("https://quotes.rest/qod.json?category=inspire")
       .then((res) => res.json())
       .then((data) => {
         setQuote(data.contents.quotes[0].quote);

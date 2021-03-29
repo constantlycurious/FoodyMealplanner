@@ -13,7 +13,7 @@
 }
 
 .navbar-logo {
-  color: black;
+  color: #9ed896;
   justify-self: start;
   cursor: pointer;
   text-decoration: none;
@@ -22,6 +22,7 @@
 .navbar-logo:hover {
   cursor: pointer;
   text-decoration: none;
+  color: #9ed896;
 }
 
 .fa-typo3 {
@@ -55,7 +56,7 @@
 }
 
 .nav-links:hover {
-  color: grey;
+  color: #9ed896;
   transition: all 0.2s ease-out;
   text-decoration: none;
 }
@@ -90,7 +91,7 @@
   }
 
   .nav-menu.active {
-    background: #878787;
+    background: #9ed896;
     opacity: 0.5;
     left: 0;
     opacity: 0.85;
