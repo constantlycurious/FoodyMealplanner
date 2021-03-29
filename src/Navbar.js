@@ -25,8 +25,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
-              ABOUT
+            <Link to="/quotes" className="nav-links" onClick={closeMobileMenu}>
+              QUOTES
             </Link>
           </li>
           <li className="nav-item">

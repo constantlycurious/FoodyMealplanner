@@ -43,8 +43,6 @@ p {
   margin: 0;
   padding: 2px;
   text-align: center;
-  color: #003691;
-  font-family: "Anonymous Pro", monospace;
 }
 
 .content {
@@ -109,5 +107,4 @@ p {
   width: 150px;
   left: 0;
   border-radius: 0;
-  border-bottom: 2px solid red;
 }

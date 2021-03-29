@@ -4,10 +4,8 @@ import CardMeal from "./RecipeCard";
 import "./MealPlanner2.css";
 import Filter from "./Filter";
 
-//const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
-//const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
-const API_ID = "8d4623fe";
-const API_KEY = "dfb5f77b9d4cc062175b5cad111db198";
+const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
+const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
 const URL = "https://api.edamam.com/search?";
 
 // We have to display 7 breakfasts, 7 lunches and 7 dinners;
